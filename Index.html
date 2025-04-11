@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluid Calculator for Newborns</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f9ff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      background: #fff;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      font-size: 22px;
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+    label, select, input, button {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .result {
+      background-color: #e0f7ff;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #333;
+    }
+    .footer small {
+      font-size: 12px;
+    }
+    .credits {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-size: 12px;
+    }
+    .credits a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>fluid pediatric</h1>
+    <h2>Fluid Calculation for Newborns</h2><label for="weight">Baby Weight (kg):</label>
+<input type="number" id="weight" step="0.01" />
+
+<label for="type">Baby Type:</label>
+<select id="type">
+  <option value="preterm">Preterm</option>
+  <option value="term">Term</option>
+</select>
+
+<label for="day">Day:</label>
+<select id="day">
+  <option value="1">Day 1</option>
+  <option value="2">Day 2</option>
+  <option value="3">Day 3</option>
+</select>
+
+<button onclick="calculateFluid()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+<h2 style="margin-top:40px;">Pediatrics Maintenance Fluid Calculation</h2>
+<p style="font-size:14px; color:#666;">[Add the logic for maintenance fluids here later]</p>
+
+  </div>  <div class="footer">
+    <p style="font-size: 18px; font-weight: bold; color: #007BFF;">وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ</p>
+  </div>  <div class="credits">
+    <a href="https://www.facebook.com/mahdi.salh99" target="_blank">Mahdi Salih Ahmed</a>
+  </div>  <script>
+    function calculateFluid() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const type = document.getElementById('type').value;
+      const day = parseInt(document.getElementById('day').value);
+
+      if (isNaN(weight) || weight <= 0) {
+        alert('Please enter a valid weight.');
+        return;
+      }
+
+      let fluidPerKg = 80;
+      if (type === 'preterm') {
+        if (day === 1) fluidPerKg = 80;
+        else if (day === 2) fluidPerKg = 100;
+        else fluidPerKg = 120;
+      } else {
+        if (day === 1) fluidPerKg = 60;
+        else if (day === 2) fluidPerKg = 80;
+        else fluidPerKg = 100;
+      }
+
+      const totalVolume = weight * fluidPerKg;
+      const hourlyRate = (totalVolume / 24).toFixed(2);
+
+      const vol5 = (totalVolume * 0.889).toFixed(1);
+      const vol50 = (totalVolume * 0.111).toFixed(1);
+
+      document.getElementById('result').innerHTML = `
+        <strong>Fluid Type:</strong> 10% Glucose Water<br>
+        <strong>Total Volume Needed:</strong> ${totalVolume.toFixed(1)} ml/day<br>
+        <strong>Hourly Rate:</strong> ${hourlyRate} ml/hour<br><br>
+        <strong>To Prepare ${totalVolume.toFixed(1)} ml of 10% Glucose Water:</strong><br>
+        - Use <strong>${vol5} ml</strong> of 5% glucose water<br>
+        - Add <strong>${vol50} ml</strong> of 50% glucose water
+      `;
+    }
+  </script></body>
+</html>
